@@ -1,0 +1,18 @@
+{
+  "name": "priject-1---to-do-list-25-06-",
+  "version": "0.0.0",
+  "private": true,
+
+"scripts": {
+"dev": "./node_modules/.bin/vite",
+"build": "./node_modules/.bin/vite build",
+"preview": "./node_modules/.bin/vite preview"
+},
+  "dependencies": {
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.3.9"
+  }
+}
