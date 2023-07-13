@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "create-form",
+  name: "CreateForm",
   props: {
     isActive: {
       type: Boolean,

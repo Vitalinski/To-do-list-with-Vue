@@ -42,7 +42,7 @@
   
   <script>
 export default {
-  name: "redact-form",
+  name: "RedactForm",
   props: {
     isRedactActive: {
       type: Boolean,
