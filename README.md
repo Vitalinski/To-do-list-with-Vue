@@ -1,4 +1,4 @@
-# Priject 1 - to do list 25.06-
+
 
 This template should help get you started developing with Vue 3 in Vite.
 
