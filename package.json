@@ -2,17 +2,19 @@
   "name": "priject-1---to-do-list-25-06-",
   "version": "0.0.0",
   "private": true,
-
-"scripts": {
-"dev": "./node_modules/.bin/vite",
-"build": "./node_modules/.bin/vite build",
-"preview": "./node_modules/.bin/vite preview"
-},
+  "scripts": {
+    "dev": "./node_modules/.bin/vite",
+    "build": "./node_modules/.bin/vite build",
+    "preview": "./node_modules/.bin/vite preview"
+  },
   "dependencies": {
-    "vue": "^3.3.4"
+    "pinia": "^2.1.4",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "sass": "^1.64.0",
     "vite": "^4.3.9"
   }
 }
