@@ -1,7 +1,7 @@
 <template>
   <div class="overlay" v-if="isActive" @click="hideForm">
     <div @click.stop class="overlay__content">
-      <form class="form">
+      <form class="form" >
         <h2>{{ formTitle }}</h2>
         <input
           v-model.trim="currentTask.title"
@@ -35,28 +35,30 @@
 </template>
     
     <script>
+    import { useToDoStore } from '../store/store';
 export default {
   name: "OverlayForm",
   props: {
-    isRedactActive: {
-      type: Boolean,
-      default: false,
-    },
     isActive: {
       type: Boolean,
       default: false,
     },
-    currentTask: {
-      type: Object,
-    },
-  },
 
+  },
+data(){
+  return{
+  store: useToDoStore(),
+  }
+},
   computed: {
+    currentTask(){
+      return this.store.currentTask
+    },
     formTitle() {
-      return this.isRedactActive ? "Redact the task" : "Create the task";
+      return this.currentTask.id ? "Redact the task" : "Create the task";
     },
     submitText() {
-      return this.isRedactActive ? "Save changes" : "Add new task";
+      return this.currentTask.id ? "Save changes" : "Add new task";
     },
   },
 
@@ -65,8 +67,9 @@ export default {
     hideForm() {
         this.currentTask.title = "";
       this.currentTask.description = "";
+      this.currentTask.id = "";
       this.currentTask.priority = "minimal";
-      this.$emit("hideForm");
+      this.store.hideForm();
     },
     getDate() {
       let date = new Date();
@@ -80,23 +83,21 @@ export default {
         description: this.currentTask.description,
         priority: this.currentTask.priority || 'minimal',
       };
-      if (this.isRedactActive) {
+      if (this.currentTask.id) {
         task.id = this.currentTask.id,
           task.priority = task.priority !== "" ? task.priority : this.currentTask.priority;
         task.title = task.title !== "" ? task.title : this.currentTask.title;
         task.description = task.description !== ""? task.description: this.currentTask.description;
 
-        this.$emit("redactTask", task);
+        this.store.redactTask(task);
       } else {
       
           task.date= this.getDate(),
           task.id= new Date(),
         
-        this.$emit("addTask", task);
+        this.store.addTask(task);
       }
-      this.currentTask.title = "";
-      this.currentTask.description = "";
-      this.currentTask.priority = "minimal";
+  this.hideForm()
  
     },
   },

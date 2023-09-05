@@ -10,10 +10,10 @@
         :style="{ 'border-left-color': priority[task.priority] }"
       >
         <div class="task__btns">
-          <button class="task__redact-btn" @click="showRedactForm(task)">
+          <button class="task__redact-btn" @click="store.showRedactForm(task)">
             <img class="task__redact-img" src="src/assets/images/pencil.png" />
           </button>
-          <button class="task__remove-btn" @click="removeTask(task)">X</button>
+          <button class="task__remove-btn" @click="store.removeTask(task)">X</button>
         </div>
         <div class="task__title">{{ task.title }}</div>
 
@@ -25,24 +25,26 @@
 </template>
 
 <script>
+import { useToDoStore } from '../store/store';
 export default {
   name: "TasksBoard",
   props:{
-tasks:{
-    type:Array
-},
+
 priority:{
     type:Object
 }
   },
-  methods: {
-    showRedactForm(task){
-        this.$emit('showRedactForm',task)
-    },
-    removeTask(current){
-        this.$emit('removeTask',current)
+  data(){
+    return{
+store:useToDoStore()
     }
   },
+  computed:{ 
+    tasks(){
+       return useToDoStore().tasks
+  },
+},
+
 };
 </script>
 
