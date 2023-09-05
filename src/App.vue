@@ -1,14 +1,15 @@
 <template >
-  <MainPage></MainPage>
+  <nav-bar></nav-bar>
+
+<router-view></router-view>
 </template>
 
 <script>
-import MainPage from "./pages/MainPage.vue";
+import NavBar from './components/NavBar.vue';
 export default {
+
   name: "App",
-  components: {
-    MainPage,
-  },
+  components: { NavBar },
 };
 </script>
 

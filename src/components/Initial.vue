@@ -1,24 +1,53 @@
 <template>
-    <div class="starter-text">
-      Let create some tasks!
-      <div class="add">
-        <button class="starter-add-btn" @click="showForm">Add new task</button>
-      </div>
-    </div>
+  <div class="initial">
+    <div class="initial__text">Let create some tasks!</div>
+
+    <button class="initial__btn " @click="store.showForm()">Add new task</button>
+  </div>
 </template>
 
 <script>
+import { useToDoStore } from '../store/store';
 export default {
-name:'Initial',
-methods:{
+  name: "Initial",
+  data(){
+    return{
+      store:useToDoStore(),
+
+    }
+  },
+  methods: {
     showForm() {
       this.$emit("showForm");
     },
-}
-}
-
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
+.initial {
+  text-align: center;
+
+  &__text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 48px;
+  margin-top: 150px;
+}
+&__btn {
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 10px;
+  border: none;
+  margin-top: 50px;
+
+  &:hover{
+  background-color: black;
+  color: white;
+}
+}
+}
+
 
 </style>
