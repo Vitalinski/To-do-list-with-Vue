@@ -73,7 +73,7 @@ data(){
     },
     getDate() {
       let date = new Date();
-      let fullDate = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+      let fullDate = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`;
       return fullDate;
     },
 
