@@ -1,27 +1,34 @@
-<template>
-
-
-  <div class="board">
-    <transition-group name="tasks-board">
-      <div
-        class="task"
-        v-for="task in tasks"
-        :key="task.id"
-        :style="{ 'border-left-color': priority[task.priority] }"
-      >
-        <div class="task__btns">
-          <button class="task__redact-btn" @click="store.showRedactForm(task)">
-            <img class="task__redact-img" src="src/assets/images/pencil.png" />
-          </button>
-          <button class="task__remove-btn" @click="store.removeTask(task)">X</button>
-        </div>
-        <div class="task__title">{{ task.title }}</div>
-
-        <div class="task__description">{{ task.description }}</div>
-        <div class="task__date">Date:{{ task.date }}</div>
-      </div>
-    </transition-group>
+<template >
+ 
+    
+  <div class="header">
+    
+    <span class="header__text">{{ typeName }}</span>
+    <button class="task__remove-btn header__btn" @click="store.removeType(typeName)">X</button>
+    
   </div>
+    <div class="board">
+      <transition-group name="tasks-board">
+        <div
+          class="task"
+          v-for="task in tasks"
+          :key="task.id"
+          :style="{ 'border-left-color': store.priority[task.priority] }"
+        >
+          <div class="task__btns">
+            <button class="task__redact-btn" @click="store.showRedactForm(task)">
+              <img class="task__redact-img" src="src/assets/images/pencil.png" />
+            </button>
+            <button class="task__remove-btn" @click="store.removeTask(task)">X</button>
+          </div>
+          <div class="task__title">{{ task.title }}</div>
+  
+          <div class="task__description">{{ task.description }}</div>
+          <div class="task__date">Date:{{ task.date }}</div>
+        </div>
+      </transition-group>
+    </div>
+  
 </template>
 
 <script>
@@ -29,32 +36,48 @@ import { useToDoStore } from '../store/store';
 export default {
   name: "TasksBoard",
   props:{
+tasks:{
+  type: Object
+},
+typeName:{
 
+},
 priority:{
     type:Object
 }
   },
   data(){
     return{
-store:useToDoStore()
+store:useToDoStore(),
+
     }
   },
-  computed:{ 
-    tasks(){
-       return useToDoStore().tasks
-  },
-},
+
 
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+.header{
+  position: sticky;
+  z-index: 0;
+  top: -8px;
+  left: 0;
+text-align: center;
+margin: -8px;
+padding: 4px;
+background-color: rgb(185, 181, 214);
+}
+.header__text{
+  font-weight: bold;
+
+}
+.header__btn{
+float: right;
+}
 .board {
-  margin-top: 2em;
-  display: grid;
-  grid-template: 1fr / repeat(3, 30%);
-  grid-auto-flow: row;
-  justify-content: space-between;
+  margin-top: 1em;
 }
 
 .task {
@@ -67,7 +90,7 @@ store:useToDoStore()
   min-height: 8em;
   display: grid;
   grid-template: 0 auto 1fr auto / 1fr;
-
+  min-width: 120px;
 
 &__title {
   text-align: center;
@@ -132,3 +155,4 @@ button:hover {
   transition: transform 0.8s ease;
 }
 </style>
+

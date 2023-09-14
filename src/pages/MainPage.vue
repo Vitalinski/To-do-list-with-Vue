@@ -21,11 +21,8 @@
           </button>
         </div>
       </div>
-      <TasksBoard
-    
-        :priority="priority"
-    
-      ></TasksBoard>
+      <TasksColumn class="columns"    
+></TasksColumn>
     </div>
     <Initial v-else> </Initial>
   </div>
@@ -36,6 +33,7 @@ import { useToDoStore } from "../store/store";
 import Initial from "../components/Initial.vue";
 import OverlayForm from "../components/OverlayForm.vue";
 import TasksBoard from "../components/TasksBoard.vue";
+import TasksColumn from "../components/TasksColumn.vue";
 
 export default {
   name: "MainPage",
@@ -43,14 +41,11 @@ export default {
     Initial,
     TasksBoard,
     OverlayForm,
-  },
+    TasksColumn
+},
   data() {
     return {
-      priority: {
-        minimal: "green",
-        medium: "yellow",
-        maximum: "red",
-      },
+    
       store:useToDoStore(),
       tasks: useToDoStore().tasks,
     };
@@ -64,7 +59,11 @@ isActive(){
 };
 </script>
 
-<style>
+<style >
+
+.columns{
+overflow: auto;
+}
 </style>
 
 

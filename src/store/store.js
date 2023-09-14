@@ -4,45 +4,90 @@ export const useToDoStore = defineStore("toDoStore", {
     tasks: {},
     isActive: false,
     currentTask: {},
+    priority: {
+      minimal: "green",
+      medium: "yellow",
+      maximum: "red",
+    },
   }),
   actions: {
     sortByPriority() {
-      let sortedTasks = {};
-      let sortedKeys = Object.keys(this.tasks).sort((a, b) =>
-        this.tasks[a].priority.localeCompare(this.tasks[b].priority)
-      );
-      for (let key of sortedKeys) {
-        sortedTasks[key] = this.tasks[key];
+      for (let typeKey of Object.keys(this.tasks)) {
+        const type = this.tasks[typeKey];
+        const sortedTasks = {};
+
+        const sortedKeys = Object.keys(type).sort((a, b) => {
+          const taskA = type[a];
+          const taskB = type[b];
+          return taskA.priority.localeCompare(taskB.priority);
+        });
+
+        for (let key of sortedKeys) {
+          sortedTasks[key] = type[key];
+        }
+
+        this.tasks[typeKey] = sortedTasks;
       }
-      return (this.tasks = sortedTasks);
     },
+
     sortByDate() {
-      let sortedTasks = {};
-      let sortedKeys = Object.keys(this.tasks).sort((a, b) => {
-        return this.tasks[b].id - this.tasks[a].id;
-      });
-      for (let key of sortedKeys) {
-        sortedTasks[key] = this.tasks[key];
+      for (let typeKey of Object.keys(this.tasks)) {
+        const type = this.tasks[typeKey];
+        let sortedTasks = {};
+        let sortedKeys = Object.keys(type).sort((a, b) => {
+          return type[b].id - type[a].id;
+        });
+        for (let key of sortedKeys) {
+          sortedTasks[key] = this.tasks[typeKey][key];
+        }
+        this.tasks[typeKey] = sortedTasks;
       }
-      return (this.tasks = sortedTasks);
     },
+
     hideForm() {
       this.isActive = false;
     },
     addTask(task) {
-      this.tasks[task.id] = task;
+      this.tasks[task.type]
+        ? (this.tasks[task.type][task.id] = task)
+        : (this.tasks[task.type] = {});
+      this.tasks[task.type][task.id] = task;
       this.isActive = false;
     },
 
     redactTask(redactedTask) {
-      let task = this.tasks[redactedTask.id];
-      task.title = redactedTask.title;
-      task.description = redactedTask.description;
-      task.priority = redactedTask.priority;
+      if (
+        this.tasks[redactedTask.type] &&
+        this.tasks[redactedTask.type][redactedTask.id]
+      ) {
+        let task = this.tasks[redactedTask.type][redactedTask.id];
+        task.title = redactedTask.title;
+        task.description = redactedTask.description;
+        task.priority = redactedTask.priority;
+      } else {
+        for (let type in this.tasks) {
+          if (this.tasks[type][redactedTask.id]) {
+            delete this.tasks[type][redactedTask.id];
+          }
+        }
+        let task = {};
+        task.title = redactedTask.title;
+        task.description = redactedTask.description;
+        task.priority = redactedTask.priority;
+        task.type = redactedTask.type;
+        task.id = redactedTask.id;
+        task.date = redactedTask.date;
+        if (!this.tasks[redactedTask.type]) {
+          this.tasks[redactedTask.type] = {};
+          this.tasks[redactedTask.type][redactedTask.id] = task;
+        } else {
+          this.tasks[redactedTask.type][redactedTask.id] = task;
+        }
+      }
       this.isActive = false;
     },
     removeTask(currentTask) {
-      delete this.tasks[currentTask.id];
+      delete this.tasks[currentTask.type][currentTask.id];
     },
     showForm() {
       this.isActive = true;
@@ -53,6 +98,11 @@ export const useToDoStore = defineStore("toDoStore", {
       this.currentTask.description = task.description;
       this.currentTask.priority = task.priority;
       this.currentTask.id = task.id;
+      this.currentTask.type = task.type;
+      this.currentTask.date = task.date;
+    },
+    removeType(type) {
+      delete this.tasks[type];
     },
   },
 });
