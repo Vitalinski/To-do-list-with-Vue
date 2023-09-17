@@ -8,33 +8,40 @@
     
   </div>
     <div class="board">
-      <transition-group name="tasks-board">
+      <!-- <transition-group name="tasks-board"> -->
+        <draggable  v-model="tasksOrder" group="tasks" item-key="id" @end="tasksDragEnd" >
+      <template #item="{ element }">
         <div
           class="task"
-          v-for="task in tasks"
-          :key="task.id"
-          :style="{ 'border-left-color': store.priority[task.priority] }"
+          :style="{ 'border-left-color': store.priority[tasks[element].priority] }"
         >
           <div class="task__btns">
-            <button class="task__redact-btn" @click="store.showRedactForm(task)">
+            <button class="task__redact-btn" @click="store.showRedactForm(tasks[element])">
               <img class="task__redact-img" src="src/assets/images/pencil.png" />
             </button>
-            <button class="task__remove-btn" @click="store.removeTask(task)">X</button>
+            <button class="task__remove-btn" @click="store.removeTask(tasks[element])">X</button>
           </div>
-          <div class="task__title">{{ task.title }}</div>
+          <div class="task__title">{{ tasks[element].title }}</div>
   
-          <div class="task__description">{{ task.description }}</div>
-          <div class="task__date">Date:{{ task.date }}</div>
+          <div class="task__description">{{ tasks[element].description }}</div>
+          <div class="task__date">Date:{{ tasks[element].date }}</div>
+          
         </div>
-      </transition-group>
+        </template>
+        </draggable>
+      <!-- </transition-group> -->
     </div>
   
 </template>
 
 <script>
 import { useToDoStore } from '../store/store';
+import draggable from "vuedraggable"
 export default {
   name: "TasksBoard",
+  components:{
+    draggable
+  },
   props:{
 tasks:{
   type: Object
@@ -48,10 +55,32 @@ priority:{
   },
   data(){
     return{
-store:useToDoStore(),
+      store:useToDoStore(),
+tasksOrder: Object.keys(this.tasks),
+
 
     }
   },
+   watch: {
+    'tasks': {
+      handler: 'updateTasksOrder',
+      deep: true, 
+    },
+  },
+  methods:{
+    updateTasksOrder() {
+      this.tasksOrder = Object.keys(this.tasks);
+    },
+    tasksDragEnd() {
+
+let newTasksObject = {}
+for(let task of this.tasksOrder){
+  newTasksObject[task]= this.store.tasks[this.typeName][task]
+}
+useToDoStore().tasks[this.typeName] = newTasksObject
+
+},
+  }
 
 
 };
