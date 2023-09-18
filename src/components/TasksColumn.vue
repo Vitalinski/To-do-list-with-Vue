@@ -1,28 +1,39 @@
 <template>
-  <div >
-    
-    <draggable class="board" v-model="columnsOrder" group="columns" item-key="idx" @end="columnDragEnd" >
+  <div>
+    <draggable
+      class="board"
+      v-model="arrTasks"
+      group="columns"
+      item-key="idx"
+      @end="columnDragEnd"
+    >
       <template #item="{ element }">
-        
-        <div class="board__columns" >
-          <TasksBoard :tasks="tasks[element]" :typeName="element"></TasksBoard>
+        <div class="board__columns">
+          <TasksBoard :tasks="element"></TasksBoard>
         </div>
       </template>
     </draggable>
   </div>
 </template>
 <script>
-import { useToDoStore } from '../store/store';
-import TasksBoard from './TasksBoard.vue';
-import draggable from 'vuedraggable';
+import { useToDoStore } from "../store/store";
+import TasksBoard from "./TasksBoard.vue";
+import draggable from "vuedraggable";
+import {
+  convertToArrayStructure,
+  convertToObjectStructure,
+} from "../functions";
 
 export default {
   components: { TasksBoard, draggable },
-  name: 'TasksColumn',
+  name: "TasksColumn",
+  mounted() {
+    this.updateArrayTasks();
+  },
   data() {
     return {
       store: useToDoStore(),
-      columnsOrder: Object.keys(useToDoStore().tasks),
+      arrTasks: useToDoStore().arrTasks,
     };
   },
   computed: {
@@ -31,27 +42,22 @@ export default {
     },
   },
   watch: {
-    'tasks': {
-      handler: 'updateColumnsOrder',
-      deep: true, 
+    tasks: {
+      handler: "updateArrayTasks",
+      deep: true,
     },
   },
 
   methods: {
-
-    updateColumnsOrder() {
-      this.columnsOrder = Object.keys(this.tasks);
+    updateArrayTasks() {
+      convertToArrayStructure(this.tasks);
+      this.arrTasks = useToDoStore().arrTasks;
     },
+
     columnDragEnd() {
-
-let newTasksObject = {}
-for(let type of this.columnsOrder){
-  newTasksObject[type]= this.tasks[type]
-}
-
-useToDoStore().tasks = newTasksObject
-
-},
+      useToDoStore().arrTasks = this.arrTasks;
+      convertToObjectStructure(this.arrTasks);
+    },
   },
 };
 </script>

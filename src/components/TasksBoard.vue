@@ -1,109 +1,93 @@
 <template >
- 
-    
   <div class="header">
-    
-    <span class="header__text">{{ typeName }}</span>
-    <button class="task__remove-btn header__btn" @click="store.removeType(typeName)">X</button>
-    
+    <span class="header__text">{{ tasks.name }}</span>
+    <button
+      class="task__remove-btn header__btn"
+      @click="store.removeType(tasks.name)"
+    >
+      X
+    </button>
   </div>
-    <div class="board">
-      <!-- <transition-group name="tasks-board"> -->
-        <draggable  v-model="tasksOrder" group="tasks" item-key="id" @end="tasksDragEnd" >
+  <div class="board">
+    <draggable
+      v-model="this.tasks.tasks"
+      group="tasks"
+      item-key="id"
+      @end="tasksDragEnd"
+    >
       <template #item="{ element }">
         <div
           class="task"
-          :style="{ 'border-left-color': store.priority[tasks[element].priority] }"
+          :style="{ 'border-left-color': store.priority[element.priority] }"
         >
           <div class="task__btns">
-            <button class="task__redact-btn" @click="store.showRedactForm(tasks[element])">
-              <img class="task__redact-img" src="src/assets/images/pencil.png" />
+            <button
+              class="task__redact-btn"
+              @click="store.showRedactForm(element)"
+            >
+              <img
+                class="task__redact-img"
+                src="src/assets/images/pencil.png"
+              />
             </button>
-            <button class="task__remove-btn" @click="store.removeTask(tasks[element])">X</button>
+            <button class="task__remove-btn" @click="store.removeTask(element)">
+              X
+            </button>
           </div>
-          <div class="task__title">{{ tasks[element].title }}</div>
-  
-          <div class="task__description">{{ tasks[element].description }}</div>
-          <div class="task__date">Date:{{ tasks[element].date }}</div>
-          
+          <div class="task__title">{{ element.title }}</div>
+
+          <div class="task__description">{{ element.description }}</div>
+          <div class="task__date">Date:{{ element.date }}</div>
         </div>
-        </template>
-        </draggable>
-      <!-- </transition-group> -->
-    </div>
-  
+      </template>
+    </draggable>
+  </div>
 </template>
 
 <script>
-import { useToDoStore } from '../store/store';
-import draggable from "vuedraggable"
+import { useToDoStore } from "../store/store";
+import draggable from "vuedraggable";
+import { convertToObjectStructure } from "../functions";
 export default {
   name: "TasksBoard",
-  components:{
-    draggable
+  components: {
+    draggable,
   },
-  props:{
-tasks:{
-  type: Object
-},
-typeName:{
-
-},
-priority:{
-    type:Object
-}
-  },
-  data(){
-    return{
-      store:useToDoStore(),
-tasksOrder: Object.keys(this.tasks),
-
-
-    }
-  },
-   watch: {
-    'tasks': {
-      handler: 'updateTasksOrder',
-      deep: true, 
+  props: {
+    tasks: {
+      type: Object,
     },
   },
-  methods:{
-    updateTasksOrder() {
-      this.tasksOrder = Object.keys(this.tasks);
-    },
+  data() {
+    return {
+      store: useToDoStore(),
+    };
+  },
+
+  methods: {
     tasksDragEnd() {
-
-let newTasksObject = {}
-for(let task of this.tasksOrder){
-  newTasksObject[task]= this.store.tasks[this.typeName][task]
-}
-useToDoStore().tasks[this.typeName] = newTasksObject
-
-},
-  }
-
-
+      convertToObjectStructure(useToDoStore().arrTasks);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
-.header{
+.header {
   position: sticky;
   z-index: 0;
   top: -8px;
   left: 0;
-text-align: center;
-margin: -8px;
-padding: 4px;
-background-color: rgb(185, 181, 214);
+  text-align: center;
+  margin: -8px;
+  padding: 4px;
+  background-color: rgb(185, 181, 214);
 }
-.header__text{
+.header__text {
   font-weight: bold;
-
 }
-.header__btn{
-float: right;
+.header__btn {
+  float: right;
 }
 .board {
   margin-top: 1em;
@@ -121,41 +105,40 @@ float: right;
   grid-template: 0 auto 1fr auto / 1fr;
   min-width: 120px;
 
-&__title {
-  text-align: center;
-  font-weight: bold;
-  margin-top: 1.5em;
-  overflow: auto;
-}
-&__description {
-  max-height: 3.2em;
-  overflow-wrap: break-word;
-  overflow: auto;
-}
-&__date {
-  font-size: 0.7em;
-  text-align: right;
-}
+  &__title {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1.5em;
+    overflow: auto;
+  }
+  &__description {
+    max-height: 3.2em;
+    overflow-wrap: break-word;
+    overflow: auto;
+  }
+  &__date {
+    font-size: 0.7em;
+    text-align: right;
+  }
 
+  &__btns {
+    text-align: right;
+  }
 
-&__btns {
-  text-align: right;
-}
+  &__remove-btn {
+    color: red;
+    font-weight: bold;
+    &:hover {
+      background-color: red;
+      color: #fff;
+      border-color: red;
+    }
+  }
 
-&__remove-btn {
-  color: red;
-  font-weight: bold;
-  &:hover {
-  background-color: red;
-  color: #fff;
-  border-color: red;
-}
-}
-
-&__redact-img {
-  max-height: 100%;
-  max-width: 100%;
-}
+  &__redact-img {
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 
 .task__btns button {
@@ -170,18 +153,6 @@ button:hover {
 }
 .task__redact-btn:hover {
   border-color: rgba(0, 0, 0, 0.5);
-}
-.tasks-board-enter-active,
-.tasks-board-leave-active {
-  transition: all 0.5s ease;
-}
-.tasks-board-enter-from,
-.tasks-board-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.tasks-board-move {
-  transition: transform 0.8s ease;
 }
 </style>
 

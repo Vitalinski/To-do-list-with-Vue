@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 export const useToDoStore = defineStore("toDoStore", {
   state: () => ({
     tasks: {},
+    arrTasks:[],
     isActive: false,
     currentTask: {},
     priority: {
