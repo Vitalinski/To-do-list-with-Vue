@@ -14,6 +14,8 @@
       group="tasks"
       item-key="id"
       @end="tasksDragEnd"
+      
+      
     >
       <template #item="{ element }">
         <div
@@ -65,8 +67,16 @@ export default {
   },
 
   methods: {
-    tasksDragEnd() {
+    tasksDragEnd(event) {
+      let taskId = event.item.__draggable_context.element.id ;
       convertToObjectStructure(useToDoStore().arrTasks);
+      let tasks = useToDoStore().tasks
+      for(let key of Object.keys(useToDoStore().tasks)){
+        if(useToDoStore().tasks[key][taskId]){
+          useToDoStore().tasks[key][taskId].type=key
+        }
+
+      }
     },
   },
 };
