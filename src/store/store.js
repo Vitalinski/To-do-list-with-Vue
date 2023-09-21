@@ -65,6 +65,7 @@ export const useToDoStore = defineStore("toDoStore", {
         task.title = redactedTask.title;
         task.description = redactedTask.description;
         task.priority = redactedTask.priority;
+        task.image = redactedTask.image
       } else {
         for (let type in this.tasks) {
           if (this.tasks[type][redactedTask.id]) {
@@ -74,6 +75,7 @@ export const useToDoStore = defineStore("toDoStore", {
         let task = {};
         task.title = redactedTask.title;
         task.description = redactedTask.description;
+        task.image = redactedTask.image
         task.priority = redactedTask.priority;
         task.type = redactedTask.type;
         task.id = redactedTask.id;
@@ -101,6 +103,8 @@ export const useToDoStore = defineStore("toDoStore", {
       this.currentTask.id = task.id;
       this.currentTask.type = task.type;
       this.currentTask.date = task.date;
+      this.currentTask.image = task.image;
+
     },
     removeType(type) {
       delete this.tasks[type];

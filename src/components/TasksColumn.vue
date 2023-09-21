@@ -6,6 +6,7 @@
       group="columns"
       item-key="idx"
       @end="columnDragEnd"
+      ghost-class="ghost"
     >
       <template #item="{ element }">
         <div class="board__columns">
@@ -63,7 +64,11 @@ export default {
 </script>
 
 <style scoped>
+.ghost{
+  opacity: 0.3;
+}
 .board {
+
   margin-top: 12px;
   display: flex;
   flex-direction: row;
@@ -72,6 +77,7 @@ export default {
 }
 
 .board__columns {
+
   padding: 8px;
   height: 65vh;
   overflow: auto;

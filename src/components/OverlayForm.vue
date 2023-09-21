@@ -25,7 +25,13 @@
             type="text"
             placeholder="Type"
             maxlength="10"
+            
           />
+          <input
+  type="file"
+  @change="saveImage"
+  class="form__image-upload"
+/>
           Priority:
           <select class="form__priority" v-model="currentTask.priority">
             <option value="minimal">Minimal</option>
@@ -85,7 +91,7 @@ export default {
       this.currentTask.id = "";
       this.currentTask.priority = "minimal";
       this.currentTask.type = "";
-
+      this.currentTask.image= null
       this.store.hideForm();
     },
     getDate() {
@@ -95,13 +101,27 @@ export default {
       }.${date.getFullYear()}`;
       return fullDate;
     },
-
+  saveImage(event) {
+      const selectedFile = event.target.files[0];
+      
+      if (selectedFile) {
+        const blob = new Blob([selectedFile], { type: selectedFile.type });
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.currentTask.image = e.target.result;
+        };
+        reader.readAsDataURL(blob);
+      }
+},
     submit() {
+      
       let task = {
         title: this.currentTask.title,
         description: this.currentTask.description,
         priority: this.currentTask.priority || "minimal",
         type: this.currentTask.type || "Without type",
+        image:this.currentTask.image|| null
       };
 
       if (this.currentTask.id) {

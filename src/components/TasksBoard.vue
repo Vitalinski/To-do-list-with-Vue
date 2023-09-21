@@ -14,9 +14,9 @@
       group="tasks"
       item-key="id"
       @end="tasksDragEnd"
-      
-      
+      ghost-class="ghost"
     >
+    
       <template #item="{ element }">
         <div
           class="task"
@@ -39,7 +39,10 @@
           <div class="task__title">{{ element.title }}</div>
 
           <div class="task__description">{{ element.description }}</div>
-          <div class="task__date">Date:{{ element.date }}</div>
+<div class="task__img">
+            <img  v-if="element.image" :src="element.image" alt="Uploaded Image" >
+  
+</div>          <div class="task__date">Date:{{ element.date }}</div>
         </div>
       </template>
     </draggable>
@@ -83,6 +86,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.ghost{
+opacity: 0.3;}
 .header {
   position: sticky;
   z-index: 0;
@@ -92,15 +98,17 @@ export default {
   margin: -8px;
   padding: 4px;
   background-color: rgb(185, 181, 214);
-}
-.header__text {
+
+&__text {
   font-weight: bold;
 }
-.header__btn {
+&__btn {
   float: right;
+}
 }
 .board {
   margin-top: 1em;
+
 }
 
 .task {
@@ -112,7 +120,7 @@ export default {
   border-left: 1em solid #000;
   min-height: 8em;
   display: grid;
-  grid-template: 0 auto 1fr auto / 1fr;
+  grid-template: 0 auto 1fr auto 1fr / 1fr;
   min-width: 120px;
 
   &__title {
@@ -127,6 +135,7 @@ export default {
     overflow: auto;
   }
   &__date {
+    margin-top: 5px;
     font-size: 0.7em;
     text-align: right;
   }
@@ -148,6 +157,16 @@ export default {
   &__redact-img {
     max-height: 100%;
     max-width: 100%;
+  }
+  &__img {
+    height: 10vw;
+  }
+  &__img img{
+    height: 100%;
+    width: 100%;
+object-fit: fill;
+    border: 2px solid #000;
+    margin-left: -2px;
   }
 }
 

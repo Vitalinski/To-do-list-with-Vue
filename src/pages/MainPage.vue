@@ -5,7 +5,7 @@
       v-model:isActive="isActive"
     ></OverlayForm>
 
-    <div v-if="Object.keys(this.tasks).length > 0">
+    <div v-if="Object.keys(store.tasks).length > 0">
       <div class="buttons">
         <div class="buttons__add">
           <button class="buttons__btn btn" @click="store.showForm()">
@@ -47,7 +47,6 @@ export default {
     return {
     
       store:useToDoStore(),
-      tasks: useToDoStore().tasks,
     };
   },
   computed:{
