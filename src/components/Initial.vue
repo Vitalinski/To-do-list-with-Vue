@@ -43,8 +43,9 @@ export default {
   margin-top: 50px;
 
   &:hover{
-  background-color: black;
+  background-color: rgb(134, 119, 119);
   color: white;
+  box-shadow: 0 5px 20px 5px #443636;
 }
 }
 }

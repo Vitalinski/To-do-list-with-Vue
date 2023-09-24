@@ -1,6 +1,6 @@
 <template>
-  <div class="overlay" v-if="isActive" @click="hideForm">
-    <div @click.stop class="overlay__content">
+  <div class="overlay" v-if="isActive" @mousedown="hideForm">
+    <div @mousedown.stop class="overlay__content">
       <form class="form">
         <h2>{{ formTitle }}</h2>
         <input

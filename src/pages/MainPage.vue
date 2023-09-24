@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-    <h1 class="main-page__title">To do list</h1>
+    <h1 class="main-page__title">Kanban board</h1>
     <OverlayForm
       v-model:isActive="isActive"
     ></OverlayForm>

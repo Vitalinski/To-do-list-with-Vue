@@ -40,7 +40,7 @@
           <div class="task__title">{{ element.title }}</div>
 
           <div class="task__description">{{ element.description }}</div>
-          <div class="task__img" @click.stop>
+          <div class="task__img" >
             <img
               v-if="element.image"
               :src="element.image"
