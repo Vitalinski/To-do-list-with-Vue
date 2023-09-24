@@ -121,7 +121,8 @@ export default {
         description: this.currentTask.description,
         priority: this.currentTask.priority || "minimal",
         type: this.currentTask.type || "Without type",
-        image:this.currentTask.image|| null
+        image:this.currentTask.image|| null,
+        done:false
       };
 
       if (this.currentTask.id) {

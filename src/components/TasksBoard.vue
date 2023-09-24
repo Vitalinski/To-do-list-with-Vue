@@ -16,16 +16,17 @@
       @end="tasksDragEnd"
       ghost-class="ghost"
     >
-    
       <template #item="{ element }">
         <div
           class="task"
+          :class="{ task__done: element.done }"
+          @click="toggleDoneClass(element)"
           :style="{ 'border-left-color': store.priority[element.priority] }"
         >
           <div class="task__btns">
             <button
               class="task__redact-btn"
-              @click="store.showRedactForm(element)"
+              @click.stop="store.showRedactForm(element)"
             >
               <img
                 class="task__redact-img"
@@ -39,10 +40,14 @@
           <div class="task__title">{{ element.title }}</div>
 
           <div class="task__description">{{ element.description }}</div>
-<div class="task__img">
-            <img  v-if="element.image" :src="element.image" alt="Uploaded Image" >
-  
-</div>          <div class="task__date">Date:{{ element.date }}</div>
+          <div class="task__img" @click.stop>
+            <img
+              v-if="element.image"
+              :src="element.image"
+              alt="Uploaded Image"
+            />
+          </div>
+          <div class="task__date">Date:{{ element.date }}</div>
         </div>
       </template>
     </draggable>
@@ -71,14 +76,20 @@ export default {
 
   methods: {
     tasksDragEnd(event) {
-      let taskId = event.item.__draggable_context.element.id ;
+      let taskId = event.item.__draggable_context.element.id;
       convertToObjectStructure(useToDoStore().arrTasks);
-      let tasks = useToDoStore().tasks
-      for(let key of Object.keys(useToDoStore().tasks)){
-        if(useToDoStore().tasks[key][taskId]){
-          useToDoStore().tasks[key][taskId].type=key
+      let tasks = useToDoStore().tasks;
+      for (let key of Object.keys(useToDoStore().tasks)) {
+        if (useToDoStore().tasks[key][taskId]) {
+          useToDoStore().tasks[key][taskId].type = key;
         }
-
+      }
+    },
+    toggleDoneClass(e) {
+      if (e.done) {
+        e.done = false;
+      } else {
+        e.done = true;
       }
     },
   },
@@ -86,9 +97,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.ghost{
-opacity: 0.3;}
+.ghost {
+  opacity: 0.3;
+}
 .header {
   position: sticky;
   z-index: 0;
@@ -99,16 +110,15 @@ opacity: 0.3;}
   padding: 4px;
   background-color: rgb(185, 181, 214);
 
-&__text {
-  font-weight: bold;
-}
-&__btn {
-  float: right;
-}
+  &__text {
+    font-weight: bold;
+  }
+  &__btn {
+    float: right;
+  }
 }
 .board {
   margin-top: 1em;
-
 }
 
 .task {
@@ -122,21 +132,28 @@ opacity: 0.3;}
   display: grid;
   grid-template: 0 auto 1fr auto 1fr / 1fr;
   min-width: 120px;
-
+  &__done {
+    background-color: #9b9090;
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    opacity: 0.5;
+  }
   &__title {
     text-align: center;
     font-weight: bold;
     margin-top: 1.5em;
     overflow: auto;
+    min-height: 1.6em;
   }
   &__description {
     max-height: 3.2em;
     overflow-wrap: break-word;
     overflow: auto;
+    min-height: 1.6em;
   }
   &__date {
     margin-top: 5px;
-    font-size: 0.7em;
+    // font-size: 0.7em;
     text-align: right;
   }
 
@@ -145,6 +162,7 @@ opacity: 0.3;}
   }
 
   &__remove-btn {
+    opacity: 1;
     color: red;
     font-weight: bold;
     &:hover {
@@ -161,10 +179,10 @@ opacity: 0.3;}
   &__img {
     height: 10vw;
   }
-  &__img img{
+  &__img img {
     height: 100%;
     width: 100%;
-object-fit: fill;
+    object-fit: fill;
     border: 2px solid #000;
     margin-left: -2px;
   }
