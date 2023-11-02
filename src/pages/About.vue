@@ -1,4 +1,6 @@
 <template>
+    <nav-bar></nav-bar>
+
   <div class="about">
     <h1 class="about__title">About the Developer</h1>
     <div class="about__text">
@@ -24,11 +26,40 @@
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue';
+
 export default {
   name: "About",
+  components:{
+    NavBar,
+  },
 };
+
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.about {
+  color: white;
+  min-width: 500px;
+  width: 50vw;
+  margin: 0 auto;
+
+  &__title {
+    text-align: center;
+    border-bottom: 2px solid #000;
+  }
+  &__text {
+    font-size: 20px;
+    border: 2px solid #000;
+    padding: 20px;
+    margin-top: 50px;
+    max-height: 60vh;
+    overflow: auto;
+  }
+}
+
+p:last-child {
+  margin-top: 20px;
+}
 
 </style>

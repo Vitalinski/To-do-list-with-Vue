@@ -1,6 +1,12 @@
+
+
+
+
 <template>
+    <nav-bar></nav-bar>
+
   <div class="main-page">
-    <h1 class="main-page__title">Kanban board</h1>
+    <h1 class="main-page__title"> Kanban board</h1>
     <OverlayForm
       v-model:isActive="isActive"
     ></OverlayForm>
@@ -34,6 +40,8 @@ import Initial from "../components/Initial.vue";
 import OverlayForm from "../components/OverlayForm.vue";
 import TasksBoard from "../components/TasksBoard.vue";
 import TasksColumn from "../components/TasksColumn.vue";
+import NavBar from '../components/NavBar.vue';
+
 
 export default {
   name: "MainPage",
@@ -41,13 +49,18 @@ export default {
     Initial,
     TasksBoard,
     OverlayForm,
-    TasksColumn
+    TasksColumn,
+    NavBar,
 },
+
   data() {
     return {
     
       store:useToDoStore(),
     };
+  },
+  mounted() {
+   this.store.getTasks()
   },
   computed:{
 isActive(){

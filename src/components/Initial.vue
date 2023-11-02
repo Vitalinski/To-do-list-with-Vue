@@ -1,8 +1,8 @@
 <template>
   <div class="initial">
-    <div class="initial__text">Let create some tasks!</div>
+    <div  class="initial__text">{{userId?'Let create some tasks!':'First, you need to create an account or log in. Click the button in the upper right corner to open the login form."'}}</div>
 
-    <button class="initial__btn " @click="store.showForm()">Add new task</button>
+    <button v-if="userId" class="initial__btn " @click="store.showForm()">Add new task</button>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
       store:useToDoStore(),
 
     }
+  },
+  computed: {
+    userId() {
+      return this.store.userId;
+    },
   },
   methods: {
     showForm() {

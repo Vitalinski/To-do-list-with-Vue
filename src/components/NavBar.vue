@@ -2,18 +2,28 @@
   <div class="navbar">
     <div class="navbar__btns">
       <button
-        class="navbar__btn-main btn"
+        class="navbar__btn"
         @click="$router.push('/')"
-        :class="{ active: route.path === '/' }"
+        :class="{  active: route.path === '/' }"
       >
         Application
       </button>
       <button
-        class="navbar__btn-about btn"
+        class="navbar__btn"
         @click="$router.push('/about')"
         :class="{ active: route.path === '/about' }"
       >
         About the developer
+      </button>
+    </div>
+    <div class="navbar__login">
+      <div class="navbar__name">{{ userName }}</div>
+
+      <button
+        class="navbar__btn"
+        @click="goToLoginPage"
+      >
+      Log out
       </button>
     </div>
   </div>
@@ -21,35 +31,73 @@
 
 <script>
 import { useRoute } from "vue-router";
+import { useToDoStore } from "../store/store";
 export default {
-  setup() {
-    const route = useRoute();
+  data(){
+    return{
+      store:useToDoStore(),
+route:useRoute(),
+  }
+},
+computed:{
 
-    return {
-      route,
-    };
+userName(){
+  return this.store.userName
+}
   },
+methods:{
+  async goToLoginPage(){
+    await this.store.logout()
+    this.store.changeIsSignUpActive()
+    this.$router.push('/login')
+  }
+}
+  
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .navbar {
-  text-align: right;
-  
+  padding:  20px;
+  background-color: #09031ba8;
+  display: flex;
+  justify-content: space-between;
+
+  &__name{
+    display: inline-block;
+    margin-right: 16px;
+    font-weight: bold;
+    font-size: 18px;
+    color: rgb(148, 154, 212);
+  }
   &__btns {
-  background-color: #240e63a8;
-  display: inline-block;
-  padding: 30px 20px;
-  border-bottom-left-radius: 12px;
+    
+& button:first-child{
+  margin-right: 10px;
+
+}
+  
+}
+&__btn{
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 0.5em;
+  border: none;
+  font-size: 16px;
+  background-image: linear-gradient(to right, white 50%, black 50%);
+  background-size: 200% 100%;
+  transition: background-position 0.5s;
+  color: black;
+  &:hover{
+  background-position: -100% 0;
+  color: white;
+}
 }
 
-&__btn-main {
-  margin-right: 10px;
-}
 }
 
 .active {
-  background-color: #796a6a;
+  background: rgb(109, 96, 179);
   color: #ffffff;
 }
 </style>

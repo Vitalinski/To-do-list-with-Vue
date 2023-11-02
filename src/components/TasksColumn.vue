@@ -81,6 +81,7 @@ export default {
   padding: 8px;
   height: 65vh;
   overflow: auto;
+  min-width:156px ;
   width: 20vw;
   border: 2px solid rgb(80, 51, 160);
   background-color: rgb(130, 121, 185);

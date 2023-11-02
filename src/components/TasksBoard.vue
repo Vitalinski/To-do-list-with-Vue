@@ -84,13 +84,10 @@ export default {
           useToDoStore().tasks[key][taskId].type = key;
         }
       }
+      this.store.updateFirebase()
     },
     toggleDoneClass(e) {
-      if (e.done) {
-        e.done = false;
-      } else {
-        e.done = true;
-      }
+   this.store.toggleDone(e)
     },
   },
 };

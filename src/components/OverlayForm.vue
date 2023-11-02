@@ -24,7 +24,7 @@
             class="form__type"
             type="text"
             placeholder="Type"
-            maxlength="10"
+            maxlength="15"
             
           />
           <input
@@ -117,12 +117,14 @@ export default {
     submit() {
       
       let task = {
-        title: this.currentTask.title,
-        description: this.currentTask.description,
+        title: this.currentTask.title||null,
+        description: this.currentTask.description||null,
         priority: this.currentTask.priority || "minimal",
         type: this.currentTask.type || "Without type",
         image:this.currentTask.image|| null,
-        done:false
+        done:false,
+        fullDate :this.currentTask.fullDate|| new Date(),
+
       };
 
       if (this.currentTask.id) {
@@ -139,8 +141,8 @@ export default {
         this.store.redactTask(task);
       } else {
         (task.date = this.getDate()),
-          (task.id = new Date()),
-          this.store.addTask(task);
+          // this.store.addTask(task);
+          this.store.addToFirebase(task)
       }
       this.hideForm();
     },
