@@ -127,8 +127,12 @@ export default {
   border-left: 1em solid #000;
   min-height: 8em;
   display: grid;
-  grid-template: 0 auto 1fr auto 1fr / 1fr;
+  grid-template: 0 auto 1fr auto 30px / 1fr;
   min-width: 120px;
+  font-size: 1.2em;
+  @media screen and (max-width: 1024px){
+    font-size: 0.8em;
+  }
   &__done {
     background-color: #9b9090;
     text-decoration: line-through;
@@ -140,18 +144,20 @@ export default {
     font-weight: bold;
     margin-top: 1.5em;
     overflow: auto;
-    min-height: 1.6em;
+    height: 3em;
+    white-space: nowrap;
   }
   &__description {
-    max-height: 3.2em;
+    height: 5em;
     overflow-wrap: break-word;
     overflow: auto;
     min-height: 1.6em;
   }
   &__date {
     margin-top: 5px;
-    // font-size: 0.7em;
     text-align: right;
+    white-space: nowrap;
+
   }
 
   &__btns {

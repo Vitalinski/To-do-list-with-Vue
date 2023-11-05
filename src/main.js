@@ -9,7 +9,6 @@ import { getFirestore,} from 'firebase/firestore';
 
 
 
-
 const pinia = createPinia()
 
 
@@ -25,8 +24,12 @@ const firebaseConfig = {
   let vueApp
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+
+
 getAuth(app).onAuthStateChanged(()=>{
     if(!vueApp){
+
     vueApp = createApp(App).use(router).use(pinia).mount("#app");
     }
 })

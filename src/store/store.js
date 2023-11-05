@@ -9,6 +9,7 @@ import { db } from "../main";
 
 export const useToDoStore = defineStore("toDoStore", {
   state: () => ({
+    isLoaderActive:false,
     userId : "",
     userTasksCollection : collection(db, "users", 'cm8zSIV4fBIcf7XbMihz', "tasks"),
 userName:'',
@@ -26,6 +27,8 @@ userName:'',
   actions: {
     async getTasks() {
       try {
+                this.startLoader()
+
         this.userId = await this.getUserId()
      
         const userDocRef = doc(db, "users", this.userId);
@@ -42,7 +45,7 @@ userName:'',
 
 
 
-        
+
         this.userTasksCollection = collection(db, "users", this.userId, "tasks")
         onSnapshot(this.userTasksCollection, (querySnapshot) => {
 
@@ -60,13 +63,23 @@ userName:'',
             this.addTask(task);
 }
           );
+          this.endLoader()
+
         });
+
       } catch (error) {
+        this.endLoader()
+
         console.log(error);
       }
     },
 
-
+startLoader(){
+ this.isLoaderActive=true
+},
+endLoader(){
+  this.isLoaderActive=false
+ },
 
     async login({ email, password }) {
       try {
@@ -82,7 +95,10 @@ userName:'',
         : (this.isSignUpActive = true);
     },
     async logout() {
+      this.userId='';
+      this.tasks={},
       await getAuth().signOut();
+      
     },
     async register({ email, password, name }) {
       try {
@@ -157,36 +173,36 @@ toggleDone(e){
 
 
 
-      // if (
-      //   this.tasks[redactedTask.type] &&
-      //   this.tasks[redactedTask.type][redactedTask.id]
-      // ) {
-      //   let task = this.tasks[redactedTask.type][redactedTask.id];
-      //   task.title = redactedTask.title;
-      //   task.description = redactedTask.description;
-      //   task.priority = redactedTask.priority;
-      //   task.image = redactedTask.image;
-      // } else {
-      //   for (let type in this.tasks) {
-      //     if (this.tasks[type][redactedTask.id]) {
-      //       delete this.tasks[type][redactedTask.id];
-      //     }
-      //   }
-      //   let task = {};
-      //   task.title = redactedTask.title;
-      //   task.description = redactedTask.description;
-      //   task.image = redactedTask.image;
-      //   task.priority = redactedTask.priority;
-      //   task.type = redactedTask.type;
-      //   task.id = redactedTask.id;
-      //   task.date = redactedTask.date;
-      //   if (!this.tasks[redactedTask.type]) {
-      //     this.tasks[redactedTask.type] = {};
-      //     this.tasks[redactedTask.type][redactedTask.id] = task;
-      //   } else {
-      //     this.tasks[redactedTask.type][redactedTask.id] = task;
-      //   }
-      // }
+      if (
+        this.tasks[redactedTask.type] &&
+        this.tasks[redactedTask.type][redactedTask.id]
+      ) {
+        let task = this.tasks[redactedTask.type][redactedTask.id];
+        task.title = redactedTask.title;
+        task.description = redactedTask.description;
+        task.priority = redactedTask.priority;
+        task.image = redactedTask.image;
+      } else {
+        for (let type in this.tasks) {
+          if (this.tasks[type][redactedTask.id]) {
+            delete this.tasks[type][redactedTask.id];
+          }
+        }
+        let task = {};
+        task.title = redactedTask.title;
+        task.description = redactedTask.description;
+        task.image = redactedTask.image;
+        task.priority = redactedTask.priority;
+        task.type = redactedTask.type;
+        task.id = redactedTask.id;
+        task.date = redactedTask.date;
+        if (!this.tasks[redactedTask.type]) {
+          this.tasks[redactedTask.type] = {};
+          this.tasks[redactedTask.type][redactedTask.id] = task;
+        } else {
+          this.tasks[redactedTask.type][redactedTask.id] = task;
+        }
+      }
       this.isActive = false;
     },
     removeTask(currentTask) {
