@@ -1,7 +1,7 @@
-name: "Label new pull request"
-description: "Add a label when a new PR is opened."
-author: "Vitalii Kutovyi"
+name: Label new pull request
+description: Add a label when a new PR is opened.
+author: Vitalii Kutovyi
 
 runs:
-using: "node16"
-main: "src/main.js"
+using: node16
+main: src/main.js
