@@ -7,6 +7,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Run your action
-        uses: ../action.yml
+        uses: ./
         with: 
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
