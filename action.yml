@@ -3,5 +3,5 @@ description: "Add a label when a new PR is opened."
 author: "Vitalii Kutovyi"
 
 runs:
-using: "node18"
+using: "node16"
 main: "src/main.js"
