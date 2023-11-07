@@ -8,7 +8,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore,} from 'firebase/firestore';
 
 
-
+console.log(111)
 const pinia = createPinia()
 
 
