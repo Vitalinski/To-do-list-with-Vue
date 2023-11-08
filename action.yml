@@ -3,10 +3,12 @@ description: Add a label when a new PR is opened.
 author: Vitalii Kutovyi
 
 inputs:
-  key:
+  gh-token:
     description: The key
     required: true
-    default: '123'
+  label:
+    description:  The label to be applied to the pull request.
+    required: true
 
 runs:
   using: node16

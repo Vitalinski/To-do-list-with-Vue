@@ -4,11 +4,10 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Run your action
-        uses: ./
+      - uses: actions/checkout@v2
+      - uses: ./
         with:
-          key: "Sample key 555"
+          gh-token: ${{secrets.GITHUB_TOKEN}}
+          label: needs-review
         # with:
         #   VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
