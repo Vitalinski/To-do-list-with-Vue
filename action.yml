@@ -3,10 +3,10 @@ description: Add a label when a new PR is opened.
 author: Vitalii Kutovyi
 
 inputs:
-key:
-description: The key
-required: true
-default: '123'
+  key:
+    description: The key
+    required: true
+    default: '123'
 
 runs:
   using: node16
