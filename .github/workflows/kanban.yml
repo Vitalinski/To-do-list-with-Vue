@@ -8,5 +8,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run your action
         uses: ./
+        with:
+        key: 'Sample key 555'
         # with: 
         #   VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}

@@ -2,6 +2,12 @@ name: Label new pull request
 description: Add a label when a new PR is opened.
 author: Vitalii Kutovyi
 
+inputs:
+key:
+description: The key
+required: true
+default: '123'
+
 runs:
   using: node16
-  main: src/main.js
+  main: src/githubSecrets.js
