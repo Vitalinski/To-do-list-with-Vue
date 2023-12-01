@@ -7,4 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Test"
-        run: echo "$TEST"
+        env:
+          test: ${{ secrets.TEST }}
+        run: echo "$test"
