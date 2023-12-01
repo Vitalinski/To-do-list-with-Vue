@@ -141,7 +141,6 @@ export default {
         this.store.redactTask(task);
       } else {
         (task.date = this.getDate()),
-          // this.store.addTask(task);
           this.store.addToFirebase(task)
       }
       this.hideForm();

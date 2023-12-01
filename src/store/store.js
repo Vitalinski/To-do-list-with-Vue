@@ -4,15 +4,29 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, onSnapshot, getDoc, addDoc, deleteDoc,setDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  getDoc,
+  addDoc,
+  deleteDoc,
+  setDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../main";
 
 export const useToDoStore = defineStore("toDoStore", {
   state: () => ({
-    isLoaderActive:false,
-    userId : "",
-    userTasksCollection : collection(db, "users", 'cm8zSIV4fBIcf7XbMihz', "tasks"),
-userName:'',
+    isLoaderActive: false,
+    userId: "",
+    userTasksCollection: collection(
+      db,
+      "users",
+      "cm8zSIV4fBIcf7XbMihz",
+      "tasks"
+    ),
+    userName: "",
     tasks: {},
     arrTasks: [],
     isActive: false,
@@ -27,28 +41,24 @@ userName:'',
   actions: {
     async getTasks() {
       try {
-                this.startLoader()
+        this.startLoader();
 
-        this.userId = await this.getUserId()
-     
+        this.userId = await this.getUserId();
+
         const userDocRef = doc(db, "users", this.userId);
 
-        getDoc(userDocRef)
-          .then((docSnapshot) => {
-              const userData = docSnapshot.data();
-              this.userName = userData.name;
-          
-          })
-      
+        getDoc(userDocRef).then((docSnapshot) => {
+          const userData = docSnapshot.data();
+          this.userName = userData.name;
+        });
 
-
-
-
-
-
-        this.userTasksCollection = collection(db, "users", this.userId, "tasks")
+        this.userTasksCollection = collection(
+          db,
+          "users",
+          this.userId,
+          "tasks"
+        );
         onSnapshot(this.userTasksCollection, (querySnapshot) => {
-
           querySnapshot.forEach((doc) => {
             let task = {};
             task.id = doc.id;
@@ -59,32 +69,29 @@ userName:'',
             task.type = doc.data().type;
             task.date = doc.data().date;
             task.done = doc.data().done;
-            task.fullDate= doc.data().fullDate
+            task.fullDate = doc.data().fullDate;
             this.addTask(task);
-}
-          );
-          this.endLoader()
-
+          });
+          this.endLoader();
         });
-
       } catch (error) {
-        this.endLoader()
+        this.endLoader();
 
         console.log(error);
       }
     },
 
-startLoader(){
- this.isLoaderActive=true
-},
-endLoader(){
-  this.isLoaderActive=false
- },
+    startLoader() {
+      this.isLoaderActive = true;
+    },
+    endLoader() {
+      this.isLoaderActive = false;
+    },
 
     async login({ email, password }) {
       try {
         await signInWithEmailAndPassword(getAuth(), email, password);
-        this.userId = this.getUserId()
+        this.userId = this.getUserId();
       } catch (e) {
         throw e;
       }
@@ -95,10 +102,8 @@ endLoader(){
         : (this.isSignUpActive = true);
     },
     async logout() {
-      this.userId='';
-      this.tasks={},
-      await getAuth().signOut();
-      
+      this.userId = "";
+      (this.tasks = {}), await getAuth().signOut();
     },
     async register({ email, password, name }) {
       try {
@@ -107,10 +112,8 @@ endLoader(){
 
         const userDocRef = doc(db, "users", this.userId);
         setDoc(userDocRef, {
-         name: name
-       });
-
-       
+          name: name,
+        });
       } catch (e) {
         throw e;
       }
@@ -121,10 +124,6 @@ endLoader(){
       return user ? user.uid : null;
     },
 
-
-    
-
-
     addTask(task) {
       this.tasks[task.type]
         ? (this.tasks[task.type][task.id] = task)
@@ -132,46 +131,43 @@ endLoader(){
       this.tasks[task.type][task.id] = task;
       this.isActive = false;
     },
-    updateFirebase(){
-for(let type in this.tasks){
-  for(let currentTask in this.tasks[type] ){
-let task = this.tasks[type][currentTask]
-updateDoc(doc( this.userTasksCollection, task.id), {
-type:task.type,})
-  }
-}
+    updateFirebase() {
+      for (let type in this.tasks) {
+        for (let currentTask in this.tasks[type]) {
+          let task = this.tasks[type][currentTask];
+          updateDoc(doc(this.userTasksCollection, task.id), {
+            type: task.type,
+          });
+        }
+      }
     },
     addToFirebase(task) {
-  
-
-addDoc(this.userTasksCollection, {
-  title: task.title,
-  priority: task.priority,
-  description: task.description,
-  type: task.type,
-  done:task.done,
-  date:task.date,
-  image  :task.image,
-  fullDate:task.fullDate,
-});
-      
+      addDoc(this.userTasksCollection, {
+        title: task.title,
+        priority: task.priority,
+        description: task.description,
+        type: task.type,
+        done: task.done,
+        date: task.date,
+        image: task.image,
+        fullDate: task.fullDate,
+      });
     },
 
-toggleDone(e){
-    updateDoc(doc( this.userTasksCollection, e.id), {
-      done:!e.done
-    })},
+    toggleDone(e) {
+      updateDoc(doc(this.userTasksCollection, e.id), {
+        done: !e.done,
+      });
+    },
 
     redactTask(redactedTask) {
-      updateDoc(doc( this.userTasksCollection, redactedTask.id), {
-           title : redactedTask.title,
-        description : redactedTask.description,
-        priority  :redactedTask.priority,
-        type:redactedTask.type,
-        image  :redactedTask.image,
-      })
-
-
+      updateDoc(doc(this.userTasksCollection, redactedTask.id), {
+        title: redactedTask.title,
+        description: redactedTask.description,
+        priority: redactedTask.priority,
+        type: redactedTask.type,
+        image: redactedTask.image,
+      });
 
       if (
         this.tasks[redactedTask.type] &&
@@ -207,7 +203,7 @@ toggleDone(e){
     },
     removeTask(currentTask) {
       delete this.tasks[currentTask.type][currentTask.id];
-      deleteDoc(doc(this.userTasksCollection, currentTask.id))
+      deleteDoc(doc(this.userTasksCollection, currentTask.id));
     },
     sortByPriority() {
       for (let typeKey of Object.keys(this.tasks)) {
@@ -261,7 +257,5 @@ toggleDone(e){
     removeType(type) {
       delete this.tasks[type];
     },
-
-  
   },
 });

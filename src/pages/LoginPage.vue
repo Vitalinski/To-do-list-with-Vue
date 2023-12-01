@@ -39,7 +39,7 @@
           <img
             @click="changeInputType('password')"
             class="password-container__img"
-            src="src/assets/images/eye.svg"
+            src="src/assets/images/eye.png"
             alt="Show"
           />
         </div>
@@ -60,7 +60,7 @@
           <img
             @click="changeInputType('confirm')"
             class="password-container__img"
-            src="src/assets/images/eye.svg"
+            src="src/assets/images/eye.png"
             alt="Show"
           />
         </div>
@@ -247,8 +247,11 @@ export default {
   position: relative;
   &__img {
     position: absolute;
-    top: 16px;
+    height: 25px;
+    width: 25px;
+    top: 10px;
     right: 0;
+    cursor: pointer;
   }
   &__invalid {
     display: block;
