@@ -3,15 +3,15 @@
     <div class="navbar__btns">
       <button
         class="navbar__btn"
-        @click="$router.push('/')"
-        :class="{  active: route.path === '/' }"
+        @click="$router.push('/Kanban-board-with-Vue/')"
+        :class="{  active: route.path === '/Kanban-board-with-Vue/' }"
       >
         Application
       </button>
       <button
         class="navbar__btn"
-        @click="$router.push('/about')"
-        :class="{ active: route.path === '/about' }"
+        @click="$router.push('/Kanban-board-with-Vue/about')"
+        :class="{ active: route.path === '/Kanban-board-with-Vue/about' }"
       >
         About the developer
       </button>

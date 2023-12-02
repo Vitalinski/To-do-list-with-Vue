@@ -113,7 +113,7 @@ export default {
       const formData = { email: this.email, password: this.password };
       try {
         await this.store.login(formData);
-        this.$router.push("/");
+        this.$router.push("/Kanban-board-with-Vue/");
         this.loginInvalidText = false;
       } catch {
         this.loginInvalidText = true;
@@ -129,7 +129,7 @@ export default {
         };
         try {
           await this.store.register(formData);
-          this.$router.push("/");
+          this.$router.push("/Kanban-board-with-Vue/");
         } catch (e) {
           this.loginInvalidText = true;
         }
