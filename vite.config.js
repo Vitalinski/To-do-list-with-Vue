@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  base: '/Login',
+  base: '/Kanban-board-with-Vue/Login',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

@@ -6,17 +6,17 @@ import LoginPage from "../pages/LoginPage.vue"
 
 const routes = [{
     name:'Main',
-    path:'/',
+    path:'/Kanban-board-with-Vue/',
     component:MainPage
 },
 {
     name:'About',
-    path:'/about',
+    path:'/Kanban-board-with-Vue/about',
     component:About
 },
 {
     name:'Login',
-    path:'/login',
+    path:'/Kanban-board-with-Vue/login',
     component:LoginPage
 },
 ]
