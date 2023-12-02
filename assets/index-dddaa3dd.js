@@ -3031,4 +3031,4 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */Kr(ek,nk,"app");const rk=tA(),ik={apiKey:VITE_FIREBASE_API_KEY,authDomain:VITE_FIREBASE_AUTH_DOMAIN,projectId:VITE_FIREBASE_PROJECT_ID,storageBucket:VITE_FIREBASE_STORAGE_BUCKET,messagingSenderId:VITE_FIREBASE_MESSAGING_SENDER_ID,appId:VITE_FIREBASE_APP_ID,measurementId:VITE_FIREBASE_Measurement_ID};let Xm;const vI=tE(ik),El=ND(vI);io(vI).onAuthStateChanged(()=>{Xm||(Xm=xy(Bb).use(tk).use(rk).mount("#app"))});
+ */Kr(ek,nk,"app");const rk=tA(),ik={apiKey:'"AIzaSyA4YAMHsUVHkj_Vqp3sLgJyUiSUDZbeukw"',authDomain:'"kanban-board-b8e32.firebaseapp.com"',projectId:'"kanban-board-b8e32"',storageBucket:'"kanban-board-b8e32.appspot.com"',messagingSenderId:'"166389514092"',appId:'"1:166389514092:web:9f2d5ab2bc567725f23d49"',measurementId:{}.VITE_FIREBASE_Measurement_ID};let Xm;const vI=tE(ik),El=ND(vI);io(vI).onAuthStateChanged(()=>{Xm||(Xm=xy(Bb).use(tk).use(rk).mount("#app"))});
