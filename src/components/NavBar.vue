@@ -49,7 +49,7 @@ methods:{
   async goToLoginPage(){
     await this.store.logout()
     this.store.changeIsSignUpActive()
-    this.$router.push('/login')
+    this.$router.push('/Kanban-board-with-Vue/login')
   }
 }
   
