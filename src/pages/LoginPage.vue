@@ -39,6 +39,7 @@
           <img
             @click="changeInputType('password')"
             class="password-container__img"
+            src="src/assets/images/eye.png"
             alt="Show"
           />
         </div>
@@ -59,6 +60,7 @@
           <img
             @click="changeInputType('confirm')"
             class="password-container__img"
+            src="src/assets/images/eye.png"
             alt="Show"
           />
         </div>

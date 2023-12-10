@@ -30,6 +30,7 @@
             >
               <img
                 class="task__redact-img"
+                src="src/assets/images/pencil.png"
                 alt="pencil"
               />
             </button>
