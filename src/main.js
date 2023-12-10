@@ -21,6 +21,9 @@ const firebaseConfig = {
     appId: import.meta.env.VITE_FIREBASE_APP_ID,
     measurementId:import.meta.env.VITE_FIREBASE_Measurement_ID , 
   };
+  for(key in firebaseConfig){
+    console.log(`${key} = ${firebaseConfig[key]}`)
+  }
   let vueApp
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
