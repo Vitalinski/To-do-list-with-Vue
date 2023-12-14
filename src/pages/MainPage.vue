@@ -2,7 +2,7 @@
   <nav-bar></nav-bar>
 
   <div class="main-page">
-    <h1 class="main-page__title">Kanban board</h1>
+    <!-- <h1 class="main-page__title">Kanban board</h1> -->
     <Spinner v-if="isLoaderActive"></Spinner>
 <div v-else>
   

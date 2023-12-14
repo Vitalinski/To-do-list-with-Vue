@@ -43,6 +43,7 @@ export default {
   min-width: 500px;
   width: 50vw;
   margin: 0 auto;
+  margin-top: 20px;
 
   &__title {
     text-align: center;

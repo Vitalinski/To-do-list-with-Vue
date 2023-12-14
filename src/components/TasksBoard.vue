@@ -129,7 +129,7 @@ export default {
   min-height: 8em;
   display: grid;
   grid-template: 0 auto 1fr auto 30px / 1fr;
-  min-width: 120px;
+  min-width: 130px;
   font-size: 1.2em;
   @media screen and (max-width: 1024px){
     font-size: 0.8em;
@@ -143,16 +143,21 @@ export default {
   &__title {
     text-align: center;
     font-weight: bold;
-    margin-top: 1.5em;
-    overflow: auto;
-    height: 3em;
+    margin-top: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis ;
+    height: 2.5em;
     white-space: nowrap;
   }
   &__description {
+    display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  min-height: 1.6em;
     height: 5em;
-    overflow-wrap: break-word;
-    overflow: auto;
-    min-height: 1.6em;
   }
   &__date {
     margin-top: 5px;

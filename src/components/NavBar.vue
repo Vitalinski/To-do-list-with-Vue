@@ -16,14 +16,15 @@
         About the developer
       </button>
     </div>
+    <h1 class="navbar__title">Kanban board</h1>
     <div class="navbar__login">
-      <div class="navbar__name">{{ userName }}</div>
+      <div class="navbar__name">{{ userName}}</div>
 
       <button
         class="navbar__btn"
         @click="goToLoginPage"
       >
-      Log out
+      {{userName?"Log out":"Log in" }}
       </button>
     </div>
   </div>
@@ -58,11 +59,22 @@ methods:{
 
 <style lang="scss" scoped>
 .navbar {
+  position: relative;
+  top: 10px;
   padding:  20px;
   background-color: #09031ba8;
   display: flex;
   justify-content: space-between;
 
+  &__title{
+    height: 34px;
+    color: #ffffff;
+    margin-left: -100px;
+    margin-top: -5px;
+    @media screen and (max-width:1024px) {
+      display:none
+    }
+  }
   &__name{
     display: inline-block;
     margin-right: 16px;
@@ -71,7 +83,7 @@ methods:{
     color: rgb(148, 154, 212);
   }
   &__btns {
-    
+  
 & button:first-child{
   margin-right: 10px;
 
@@ -83,7 +95,7 @@ methods:{
   border-radius: 12px;
   padding: 0.5em;
   border: none;
-  font-size: 16px;
+  font-size: 20px;
   background-image: linear-gradient(to right, white 50%, black 50%);
   background-size: 200% 100%;
   transition: background-position 0.5s;
