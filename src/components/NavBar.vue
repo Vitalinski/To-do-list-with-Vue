@@ -71,7 +71,12 @@ methods:{
     color: #ffffff;
     margin-left: -100px;
     margin-top: -5px;
-    @media screen and (max-width:1024px) {
+    @media screen and (max-width: 1024px){
+    font-size: 1.2em;
+    margin-left: 10px;
+    margin-top: 1px;
+  }
+    @media screen and (max-width:768px) {
       display:none
     }
   }
@@ -80,7 +85,15 @@ methods:{
     margin-right: 16px;
     font-weight: bold;
     font-size: 18px;
-    color: rgb(148, 154, 212);
+    color:rgb(112, 146, 130);
+    @media screen and (max-width: 1024px){
+    font-size: 1em;
+  }
+  @media screen and (max-width: 568px){
+    font-size: 0.5em;
+    margin-right: 6px;
+
+  }
   }
   &__btns {
   
@@ -92,7 +105,7 @@ methods:{
 }
 &__btn{
   font-weight: bold;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 0.5em;
   border: none;
   font-size: 20px;
@@ -100,6 +113,12 @@ methods:{
   background-size: 200% 100%;
   transition: background-position 0.5s;
   color: black;
+  @media screen and (max-width: 1024px){
+    font-size: 1em;
+  }
+  @media screen and (max-width: 568px){
+    font-size: 0.7em;
+  }
   &:hover{
   background-position: -100% 0;
   color: white;
@@ -109,7 +128,8 @@ methods:{
 }
 
 .active {
-  background: rgb(109, 96, 179);
+  background: rgb(55, 99, 86);
+
   color: #ffffff;
 }
 </style>

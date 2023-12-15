@@ -179,7 +179,8 @@ export default {
     &__title {
       font-family: Poppins-Bold;
 
-      color: rgb(109, 96, 179);
+      color:rgb(99, 168, 103);
+
       font-size: 48px;
     }
   }
@@ -214,7 +215,7 @@ export default {
       font-weight: bold;
       width: 80%;
       border-radius: 25px;
-      background: linear-gradient(to right, #861677, #21d4fd, #b721ff);
+      background: linear-gradient(to right, #16863b, #21d4fd, #21ff2c);
       font-size: 16px;
       padding: 0 20px;
       height: 50px;
@@ -237,6 +238,8 @@ export default {
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
+    color:rgb(99, 168, 103);
+
     &:hover {
       text-decoration: underline;
       color: green;

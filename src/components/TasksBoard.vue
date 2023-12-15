@@ -106,7 +106,8 @@ export default {
   text-align: center;
   margin: -8px;
   padding: 4px;
-  background-color: rgb(185, 181, 214);
+  background-color: rgb(181, 214, 201);
+
 
   &__text {
     font-weight: bold;

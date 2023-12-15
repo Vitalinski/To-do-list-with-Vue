@@ -32,12 +32,13 @@ export const useToDoStore = defineStore("toDoStore", {
     isActive: false,
     currentTask: {},
     priority: {
-      minimal: "green",
-      medium: "yellow",
-      maximum: "red",
+      minimal: "rgb(48, 126, 74)",
+      medium: "rgb(216, 213, 58)",
+      maximum: "rgb(214, 59, 59)",
     },
     isSignUpActive: false,
   }),
+  
   actions: {
     async getTasks() {
       try {

@@ -77,17 +77,20 @@ export default {
 }
 
 .board__columns {
-
   padding: 8px;
   height: 70vh;
   overflow: auto;
   min-width:156px ;
   width: 20vw;
-  border: 2px solid rgb(80, 51, 160);
-  background-color: rgb(130, 121, 185);
+  border: 2px solid rgb(39, 110, 89);
+
+  background-color: rgb(121, 146, 134);
+
+  
   @media screen and (min-width: 1024px) {
-    min-width: 20vw;
+    min-width: 238px;
 
   }
+  
 }
 </style>
