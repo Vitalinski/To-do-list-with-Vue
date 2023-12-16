@@ -78,7 +78,7 @@ export default {
 
 .board__columns {
   padding: 8px;
-  height: 70vh;
+  height: 76vh;
   overflow: auto;
   min-width:156px ;
   width: 20vw;
