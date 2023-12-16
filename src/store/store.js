@@ -77,6 +77,8 @@ export const useToDoStore = defineStore("toDoStore", {
         });
       } catch (error) {
         this.endLoader();
+
+        // console.log(error);
       }
     },
 
