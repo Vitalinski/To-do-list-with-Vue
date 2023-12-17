@@ -17,38 +17,48 @@
           cols="30"
           rows="10"
         ></textarea>
-        <div>
-          <input
-            v-model.trim="currentTask.type"
-            @input="limitToSingleLetter"
-            class="form__type"
-            type="text"
-            placeholder="Type"
-            maxlength="15"
-            
-          />
-          <input
-  type="file"
-  @change="saveImage"
-  class="form__image-upload"
-/>
-          Priority:
-          <select class="form__priority" v-model="currentTask.priority">
-            <option value="minimal">Minimal</option>
-            <option value="medium">Medium</option>
-            <option value="maximum">Maximum</option>
-          </select>
-
-          <button class="form__submit" @click.prevent="submit">
-            {{ submitText }}
-          </button>
+        <div class="form__footer">
+          <div class="form__img-block">
+            <input type="file" @change="saveImage" class="form__image-upload" />
+            <div class="form__image">
+              
+              <img v-if="currentTask.image" :src="currentTask.image" alt="Uploaded Image" />
+              <p v-else>Choose your image</p>
+            </div>
+          </div>
+          <div >
+            <div>
+             <span> Type:</span>
+              <input
+                v-model.trim="currentTask.type"
+                @input="limitToSingleLetter"
+                class="form__type"
+                type="text"
+                placeholder="Type"
+                maxlength="15"
+              />
+            </div>
+            <div>
+            <span>  Priority:</span>
+              <select class="form__priority" v-model="currentTask.priority">
+                <option value="minimal">Minimal</option>
+                <option value="medium">Medium</option>
+                <option value="maximum">Maximum</option>
+              </select>
+            </div>
+            <div>
+              <button class="form__submit" @click.prevent="submit">
+                {{ submitText }}
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
   </div>
 </template>
-    
-    <script>
+
+<script>
 import { useToDoStore } from "../store/store";
 export default {
   name: "OverlayForm",
@@ -68,7 +78,7 @@ export default {
       return this.store.currentTask;
     },
     formTitle() {
-      return this.currentTask.id ? "Redact the task" : "Create the task";
+      return this.currentTask.id ? "Watch or redact the task" : "Create the task";
     },
     submitText() {
       return this.currentTask.id ? "Save changes" : "Add new task";
@@ -91,7 +101,7 @@ export default {
       this.currentTask.id = "";
       this.currentTask.priority = "minimal";
       this.currentTask.type = "";
-      this.currentTask.image= null
+      this.currentTask.image = null;
       this.store.hideForm();
     },
     getDate() {
@@ -101,30 +111,28 @@ export default {
       }.${date.getFullYear()}`;
       return fullDate;
     },
-  saveImage(event) {
+    saveImage(event) {
       const selectedFile = event.target.files[0];
-      
+
       if (selectedFile) {
         const blob = new Blob([selectedFile], { type: selectedFile.type });
-        
+
         const reader = new FileReader();
         reader.onload = (e) => {
           this.currentTask.image = e.target.result;
         };
         reader.readAsDataURL(blob);
       }
-},
+    },
     submit() {
-      
       let task = {
-        title: this.currentTask.title||null,
-        description: this.currentTask.description||null,
+        title: this.currentTask.title || null,
+        description: this.currentTask.description || null,
         priority: this.currentTask.priority || "minimal",
         type: this.currentTask.type || "Without type",
-        image:this.currentTask.image|| null,
-        done:false,
-        fullDate :this.currentTask.fullDate|| new Date(),
-
+        image: this.currentTask.image || null,
+        done: false,
+        fullDate: this.currentTask.fullDate || new Date(),
       };
 
       if (this.currentTask.id) {
@@ -140,16 +148,15 @@ export default {
         task.date = this.currentTask.date;
         this.store.redactTask(task);
       } else {
-        (task.date = this.getDate()),
-          this.store.addToFirebase(task)
+        (task.date = this.getDate()), this.store.addToFirebase(task);
       }
       this.hideForm();
     },
   },
 };
 </script>
-    
-    <style lang="scss">
+
+<style lang="scss">
 .overlay {
   top: 0;
   right: 0;
@@ -163,8 +170,9 @@ export default {
   &__content {
     padding: 2em;
     margin: auto;
-    background: white;
+    background: rgb(189, 199, 194);
     border-radius: 12px;
+    width: 768px;
   }
 }
 
@@ -172,18 +180,76 @@ export default {
   text-align: center;
   display: flex;
   flex-direction: column;
+  &__footer {
+    font-size: 18px;
+    display: flex;
+    text-align: left;
+    margin-top: 10px;
+    justify-content: space-between;
 
+   
+  }
+  &__img-block{
+    display: flex;
+    align-items: end;
+    @media screen and (max-width: 678px) {
+      display: block;
+      
+    }
+  }
+  &__image {
+    border: 1px solid #000;
+    background-color: white;
+    height: 120px;
+    width: 200px;
+    text-align: center;
+    & p{
+      line-height: 120px;
+    }
+
+    & img {
+      height: 100%;
+      width: 100%;
+      object-fit: fill;
+      margin-bottom: -5px;
+    }
+  }
+  &__image-upload {
+  
+    max-width: 132px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
   &__title,
   &__description {
     width: 100%;
     border: 1px solid #000;
     padding: 0.5em;
     margin-top: 1em;
+    font-size: 16px;
+    
+  }
+  &__type,
+  &__priority{
+    font-size: 16px;
+  }
+  span{
+margin-right: 10px;
+font-size: 18px;
+
   }
   &__submit {
-    margin-left: 5em;
-    margin-top: 1em;
-    align-self: flex-end;
+    white-space: nowrap;
+    font-size: 16px;
+    background-color: rgb(55, 99, 86);
+    color: white;
+    padding: 0.5em;
+    border-radius: 4px;
+    margin-top: 1.5em;
+  margin-left: 130px;
+  &:hover{
+    opacity: 0.8;
+  }
   }
 }
 </style>
