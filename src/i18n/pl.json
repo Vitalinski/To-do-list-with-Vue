@@ -1,0 +1,65 @@
+{
+    "changeLang":"Zmień język",
+  "appName": "Kanban Board",
+  "loginPage": {
+    "welcome": "Witamy w",
+    "placeholders": {
+      "name": "Imię",
+      "email": "Email",
+      "password": "Hasło",
+      "confirm": "Potwierdż hasło"
+    },
+    "passwordConfirmInvalid": "Hasła nie są takie same.",
+    "checkData": "Sprawdż email i hasło (min 6 znaków)",
+    "invalidData": "Błędny email lub hasło",
+
+    "createAccountBtn": "Utwórz profil",
+    "logInBtn": "Zaloguj",
+    "haveAcc": "Już masz profil?",
+    "dHaveAcc": "Nie masz jeszcze profilu?",
+    "logIn": "Logowanie",
+    "signUp": "Rejestracja"
+  },
+
+  "mainPage":{
+    "addTask":"Dodaj zadanie",
+    "sortByDate":"Sortuj według daty",
+    "sortByPriority":"Sortuj według priorytetu"
+
+  },
+  "aboutPage":{
+    "title":"O Deweloperze",
+    "hello":"Cześć",
+    "text":"Mam na imię Vitalii i jestem zapalonym programistą ze znajomością Vue.js. Uwielbiam tworzyć innowacyjne rozwiązania i odkrywać nowe technologie, aby budować niesamowite aplikacje. Stale się uczę i jestem na bieżąco z najnowszymi trendami i najlepszymi praktykami w branży. Oprócz umiejętności technicznych cenię współpracę i pracę zespołową. Wierzę w skuteczną komunikację i lubię pracować z różnorodnymi zespołami, aby dostarczać wysokiej jakości wyniki. Zawsze poszukuję nowych możliwości rozwoju osobistego i zawodowego.",
+    "bottomText":"Dziękuję za odwiedzenie mojej strony! Jeśli masz jakieś pytania lub chcesz nawiązać kontakt, skontaktuj się ze mną."
+  },
+  "navBar":{
+        "application":"Aplikacja",
+        "about":"O deweloperze",
+        "logIn":"Zaloguj",
+        "logOut":"Wyloguj"
+  },
+  "overlayForm":{
+    "placeholders":{
+        "title":"Tytuł",
+        "description":"Opis",
+        "type":"Typ"
+    },
+    "chooseImage":"Wybierz obrazek",
+    "type":"Typ:",
+    "priority":"Priorytet:",
+    "minimal":"Minimalny",
+    "medium":"Średni",
+    "maximum":"Maksymalny",
+    "watch":"Zobacz lub zmień zadanie",
+    "create": "Utwórz zadanie",
+    "save":"Zapisz zmiany" ,
+    "add":"Dodaj zadanie"
+
+  },
+  "initial":{
+    "letCreate":"Stwórzmy kilka zadań!",
+    "notLoggedMessage":"W pierwszej kolejności należy założyć konto lub się zalogować. Aby otworzyć formularz logowania, należy kliknąć przycisk w prawym górnym rogu.",
+    "add":"Dodaj zadanie"
+  }
+}

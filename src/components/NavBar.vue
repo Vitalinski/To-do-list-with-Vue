@@ -6,17 +6,17 @@
         @click="$router.push('/Kanban-board-with-Vue/')"
         :class="{  active: route.path === '/Kanban-board-with-Vue/' }"
       >
-        Application
+       {{ $t("navBar.application") }} 
       </button>
       <button
         class="navbar__btn"
         @click="$router.push('/Kanban-board-with-Vue/about')"
         :class="{ active: route.path === '/Kanban-board-with-Vue/about' }"
       >
-        About the developer
+      {{ $t("navBar.about") }} 
       </button>
     </div>
-    <h1 class="navbar__title">Kanban board</h1>
+    <h1 class="navbar__title">{{ $t("appName") }} </h1>
     <div class="navbar__login">
       <div class="navbar__name">{{ userName}}</div>
 
@@ -24,7 +24,7 @@
         class="navbar__btn"
         @click="goToLoginPage"
       >
-      {{userName?"Log out":"Log in" }}
+      {{userName?$t("navBar.logOut") :$t("navBar.logIn") }}
       </button>
     </div>
   </div>

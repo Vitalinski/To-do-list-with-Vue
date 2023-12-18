@@ -2,7 +2,6 @@
   <nav-bar></nav-bar>
 
   <div class="main-page">
-    <!-- <h1 class="main-page__title">Kanban board</h1> -->
     <Spinner v-if="isLoaderActive"></Spinner>
 <div v-else>
   
@@ -12,15 +11,15 @@
         <div class="buttons">
           <div class="buttons__add">
             <button class="buttons__btn btn" @click="store.showForm()">
-              Add new task
+            {{ $t('mainPage.addTask') }}
             </button>
           </div>
           <div class="buttons__sort">
             <button class="buttons__btn btn" @click="store.sortByDate()">
-              Sort by date
+              {{ $t('mainPage.sortByDate') }}
             </button>
             <button class="buttons__btn btn" @click="store.sortByPriority()">
-              Sort by priority
+              {{ $t('mainPage.sortByPriority') }}
             </button>
           </div>
         </div>

@@ -2,18 +2,17 @@
   <div class="overlay" v-if="isActive" @mousedown="hideForm">
     <div @mousedown.stop class="overlay__content">
       <form class="form">
-        <h2>{{ formTitle }}</h2>
+        <h2>{{  currentTask.id ? $t('overlayForm.watch')  :  $t('overlayForm.create') }}</h2>
         <input
           v-model.trim="currentTask.title"
           class="form__title"
           type="text"
-          placeholder="Title"
-        />
+          :placeholder="$t('overlayForm.placeholders.title')"        />
         <textarea
           v-model.trim="currentTask.description"
           class="form__description"
           type="text"
-          placeholder="Description"
+          :placeholder="$t('overlayForm.placeholders.description')"        
           cols="30"
           rows="10"
         ></textarea>
@@ -23,32 +22,32 @@
             <div class="form__image">
               
               <img v-if="currentTask.image" :src="currentTask.image" alt="Uploaded Image" />
-              <p v-else>Choose your image</p>
+              <p v-else>{{ $t('overlayForm.chooseImage') }}</p>
             </div>
           </div>
           <div >
             <div>
-             <span> Type:</span>
+             <span>{{ $t('overlayForm.type') }}</span>
               <input
                 v-model.trim="currentTask.type"
                 @input="limitToSingleLetter"
                 class="form__type"
                 type="text"
-                placeholder="Type"
+                :placeholder="$t('overlayForm.placeholders.type')"        
                 maxlength="15"
               />
             </div>
             <div>
-            <span>  Priority:</span>
+            <span> {{ $t('overlayForm.priority') }}</span>
               <select class="form__priority" v-model="currentTask.priority">
-                <option value="minimal">Minimal</option>
-                <option value="medium">Medium</option>
-                <option value="maximum">Maximum</option>
+                <option value="minimal">{{ $t('overlayForm.minimal') }}</option>
+                <option value="medium">{{ $t('overlayForm.medium') }}</option>
+                <option value="maximum">{{ $t('overlayForm.maximum') }}</option>
               </select>
             </div>
             <div>
               <button class="form__submit" @click.prevent="submit">
-                {{ submitText }}
+                {{ currentTask.id ?  $t('overlayForm.save') : $t('overlayForm.add')}}
               </button>
             </div>
           </div>
@@ -76,12 +75,6 @@ export default {
   computed: {
     currentTask() {
       return this.store.currentTask;
-    },
-    formTitle() {
-      return this.currentTask.id ? "Watch or redact the task" : "Create the task";
-    },
-    submitText() {
-      return this.currentTask.id ? "Save changes" : "Add new task";
     },
   },
 

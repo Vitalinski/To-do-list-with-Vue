@@ -1,40 +1,29 @@
 <template>
-    <nav-bar></nav-bar>
+  <nav-bar></nav-bar>
 
   <div class="about">
-    <h1 class="about__title">About the Developer</h1>
+    <h1 class="about__title">{{ $t("aboutPage.title") }}</h1>
     <div class="about__text">
-     <h3> Hello! </h3>
+      <h3>{{ $t("aboutPage.hello") }}</h3>
       <p>
-        My name is Vitalii, and I am a passionate developer with
-        expertise in Vue.js. I love creating innovative solutions
-        and exploring new technologies to build amazing applications.  I am
-        constantly learning and staying up to date with the latest industry trends
-        and best practices. In addition to my technical skills, I value
-        collaboration and teamwork. I believe in effective communication and enjoy
-        working with diverse teams to deliver high-quality results.  I am always seeking new opportunities to grow
-        both personally and professionally. 
+        {{ $t("aboutPage.text") }}
       </p>
       <p>
-        
-        Thank you for visiting my page! If you
-        have any questions or would like to connect, please feel free to reach out
-        to me.
+        {{ $t("aboutPage.bottomText") }}
       </p>
     </div>
   </div>
 </template>
 
 <script>
-import NavBar from '../components/NavBar.vue';
+import NavBar from "../components/NavBar.vue";
 
 export default {
   name: "About",
-  components:{
+  components: {
     NavBar,
   },
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -62,5 +51,4 @@ export default {
 p:last-child {
   margin-top: 20px;
 }
-
 </style>

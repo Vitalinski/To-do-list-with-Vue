@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <div class="login-container">
-      <div class="login-container__text">Welcome to</div>
-      <h2 class="login-container__title">Kanban Board</h2>
+      <div class="login-container__text">{{ $t("loginPage.welcome") }}</div>
+      <h2 class="login-container__title">{{ $t("appName") }}</h2>
       <form
         @submit.prevent="isSignUpActive ? getSignInData() : getLoginData()"
         class="login-form"
@@ -11,14 +11,14 @@
         <input
           v-if="isSignUpActive"
           class="login-form__input"
-          placeholder="Name"
+          :placeholder="$t('loginPage.placeholders.name')"
           required
           v-model="name"
           type="text"
         />
         <input
           class="login-form__input"
-          placeholder="Email"
+          :placeholder="$t('loginPage.placeholders.email')"
           required
           v-model="email"
           type="email"
@@ -30,7 +30,7 @@
             id="password"
             class="login-form__input"
             type="password"
-            placeholder="Password"
+            :placeholder="$t('loginPage.placeholders.password')"
             required
             @focus="loginInvalidText=false"
             v-model="password"
@@ -49,12 +49,12 @@
             id="confirm"
             class="login-form__input"
             type="password"
-            placeholder="Confirm password"
+            :placeholder="$t('loginPage.placeholders.confirm')"
             required
             v-model="passwordConfirmation"
           />
           <span v-if="passwordInvalidText" class="password-container__invalid"
-            >Passwords do not match.</span
+            >{{ $t('loginPage.passwordConfirmInvalid') }}</span
           >
 
           <img
@@ -65,13 +65,13 @@
           />
         </div>
         <button class="login-form__btn" type="subbmit">
-          {{ isSignUpActive ? "Create Account" : "LOGIN" }}
+          {{ isSignUpActive ? $t('loginPage.createAccountBtn') : $t('loginPage.logInBtn')}}
         </button>
         <span v-if="loginInvalidText" class="login-form__invalid">
           {{
             isSignUpActive
-              ? "Please check your email and password (min 6 characters)"
-              : "Invalid email or password"
+              ? $t('loginPage.checkData')   
+              : $t('loginPage.invalidData')  
           }}</span
         >
       </form>
@@ -79,11 +79,11 @@
         <span class="login-signUp__text"
           >{{
             isSignUpActive
-              ? "Already have an account?"
-              : "Don`t have an account?"
+              ?  $t('loginPage.haveAcc')
+              :  $t('loginPage.dHaveAcc')
           }}
           <a @click="changeForm" href="#" class="login-signUp__link">{{
-            isSignUpActive ? "Log in" : "Sign Up"
+            isSignUpActive ? $t('loginPage.logIn') : $t('loginPage.signUp')
           }}</a></span
         >
       </div>

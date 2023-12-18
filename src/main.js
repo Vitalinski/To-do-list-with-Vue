@@ -8,7 +8,19 @@ import {  initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore,} from 'firebase/firestore';
 
+import { I18nD, createI18n, useI18n } from "vue-i18n";
+import { languages } from "./i18n/I18n";
+import { defaultLocale } from "./i18n/I18n";
 
+
+const messages = Object.assign(languages)
+const i18n = createI18n({
+  legacy: false,
+  locale: defaultLocale,
+  fallbackLocale:'en',
+  messages,
+
+})
 const pinia = createPinia()
 
 
@@ -31,7 +43,12 @@ const firebaseConfig = {
 getAuth(app).onAuthStateChanged(()=>{
     if(!vueApp){
 
-    vueApp = createApp(App).use(router).use(pinia).mount("#app");
+    vueApp = createApp(App, {
+      setup(){
+        const {t} = useI18n()
+        return {t}
+      }
+    }).use(i18n).use(router).use(pinia).mount("#app");
     }
 })
 

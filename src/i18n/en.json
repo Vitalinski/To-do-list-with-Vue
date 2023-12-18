@@ -1,0 +1,69 @@
+{
+    "changeLang":"Change language",
+    "appName": "Kanban Board",
+    "loginPage": {
+    "welcome": "Welcome to",
+    "placeholders": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirm": "Confirm password"
+    },
+
+    "passwordConfirmInvalid": "Passwords do not match.",
+    "checkData": "Please check your email and password (min 6 characters)",
+    "invalidData": "Invalid email or password",
+
+    "createAccountBtn": "Create Account",
+    "logInBtn": "LOGIN",
+    "haveAcc": "Already have an account?",
+    "dHaveAcc": "Don`t have an account?",
+    "logIn": "Log in",
+    "signUp": "Sign up"
+  },
+
+
+
+
+  "mainPage":{
+    "addTask":"Add new task",
+    "sortByDate":"Sort by date",
+    "sortByPriority":"Sort by priority"
+
+  },
+  "aboutPage":{
+    "title":"About the Developer",
+    "hello":"Hello!",
+    "text":" My name is Vitalii, and I am a passionate developer with expertise in Vue.js. I love creating innovative solutions and exploring new technologies to build amazing applications.  I am constantly learning and staying up to date with the latest industry trends and best practices. In addition to my technical skills, I value collaboration and teamwork. I believe in effective communication and enjoy working with diverse teams to deliver high-quality results.  I am always seeking new opportunities to grow both personally and professionally.",
+    "bottomText":"  Thank you for visiting my page! If you have any questions or would like to connect, please feel free to reach out to me."
+  },
+  "navBar":{
+        "application":"Application",
+        "about":"About the developer",
+        "logIn":"Log in",
+        "logOut":"Log out"
+  },
+  "overlayForm":{
+    "placeholders":{
+        "title":"Title",
+        "description":"Description",
+        "type":"Type"
+    },
+    "chooseImage":"Choose your image",
+    "type":"Type:",
+    "priority":"Priority:",
+    "minimal":"Minimal",
+    "medium":"Medium",
+    "maximum":"Maximum",
+    "watch":"Watch or redact the task",
+    "create": "Create the task",
+    "save":"Save changes" ,
+    "add":"Add new task"
+
+  },
+  "initial":{
+    "letCreate":"Let create some tasks!",
+    "notLoggedMessage":"First, you need to create an account or log in. Click the button in the upper right corner to open the login form.",
+    "add":"Add new task"
+  }
+}

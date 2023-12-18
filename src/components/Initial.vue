@@ -1,8 +1,8 @@
 <template>
   <div class="initial">
-    <div  class="initial__text">{{userId?'Let create some tasks!':'First, you need to create an account or log in. Click the button in the upper right corner to open the login form."'}}</div>
+    <div  class="initial__text">{{userId? $t('initial.letCreate'): $t('initial.notLoggedMessage')}}</div>
 
-    <button v-if="userId" class="initial__btn " @click="store.showForm()">Add new task</button>
+    <button v-if="userId" class="initial__btn " @click="store.showForm()">{{$t('initial.add')}}</button>
   </div>
 </template>
 
