@@ -8,5 +8,5 @@ You can also mark tasks as done, sort tasks by the date added, and by task
 priority. Additionally, the project includes a store and routing.
 
 <b>Technologies:<b/> HTML, CSS(SCSS), JavaScript, Vue, Vite, Firebase, Pinia, Vue
-Router, Vue Draggable.
+Router, Vue Draggable, I18n.
 
